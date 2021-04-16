@@ -65,7 +65,7 @@ static void NewingDataTypes()
     bool b = new bool();          // 设置为false
     int i = new int();            // 设置为0
     double d = new double();      // 设置为0
-    DataTime dt = new DataTime(); // 设置为1/1/0001 12:00:00 AM
+    DateTime dt = new DateTime(); // 设置为1/1/0001 12:00:00 AM
     Console.WriteLine("{0}, {1}, {2}, {3}", b, i, d, dt);
     Console.WriteLine();
 }
@@ -195,7 +195,7 @@ static void UseBigInteger()
     BigInteger reallyBig2 = biggy * reallyBig;
     Console.WriteLine("Value of reallyBig2 is {0}", reallyBig2);
 }
-```
+``` 
  
 ## 使用字符串数据
 
