@@ -36,12 +36,18 @@ namespace CSharp_Basic_Program
             //NarrowWithConvert();
             //DeclareExplicitVars();
             //QueryOverInts();
-            ForAndEachLoop();
+            //ForAndEachLoop();
+            //VarInForeachLoop();
+            //ExecuteWhileLoop();
+            //ExecuteDoWhileLoop();
+            //ExecuteSwitch();
+            ExecuteSwitchOnString();
 
             // 按下 Enter 键以后关闭
             Console.ReadLine();
         }
 
+        #region 收纳
         // 内建数据类型的新操作符
         // ===================================================================
         static void NewingDataTypes()
@@ -84,7 +90,7 @@ namespace CSharp_Basic_Program
             Console.WriteLine("char.IsLetter('a'): {0}", char.IsLetter(myChar));
             Console.WriteLine("char.IsWhiteSpace('Hello There', 5): {0}", char.IsWhiteSpace("Hello There", 5));
             Console.WriteLine("char.IsWhiteSpace('Hello There', 6): {0}", char.IsWhiteSpace("Hello There", 6));
-            Console.WriteLine("char.IsFunctuation('?'): {0}", char.IsPunctuation('?'));     
+            Console.WriteLine("char.IsFunctuation('?'): {0}", char.IsPunctuation('?'));
             Console.WriteLine();
         }
 
@@ -101,7 +107,7 @@ namespace CSharp_Basic_Program
             int i = int.Parse("8");
             Console.WriteLine("Value of i: {0}", i);
             char c = Char.Parse("w");
-            Console.WriteLine("Value of c: {0}", c);   
+            Console.WriteLine("Value of c: {0}", c);
             Console.WriteLine();
         }
 
@@ -334,7 +340,7 @@ namespace CSharp_Basic_Program
 
             // 这次告诉编译器增加CIL代码，如果发生上溢或下溢就抛出异常
             try
-            {           
+            {
                 // 强制溢出检测
                 //checked
                 //{
@@ -349,7 +355,7 @@ namespace CSharp_Basic_Program
                     Console.WriteLine("sum = {0}", sum);
                 }
             }
-            catch(OverflowException ex)
+            catch (OverflowException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -450,7 +456,7 @@ namespace CSharp_Basic_Program
                          where i < 10
                          select i;
             Console.Write("Values in subset: ");
-            foreach(var i in subset)
+            foreach (var i in subset)
             {
                 Console.Write("{0}", i);
             }
@@ -466,7 +472,7 @@ namespace CSharp_Basic_Program
         static void ForAndEachLoop()
         {
             // 注意！“i”只在for循环域内可见
-            for(int i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
                 Console.WriteLine("Number is: {0}", i);
             }
@@ -474,13 +480,13 @@ namespace CSharp_Basic_Program
 
             // 使用foreach迭代数组项
             string[] carTypes = { "Ford", "BWM", "Yugo", "Honda" };
-            foreach(string c in carTypes)
+            foreach (string c in carTypes)
             {
                 Console.WriteLine(c);
             }
 
             int[] myInts = { 10, 20, 30, 40 };
-            foreach(int i in myInts)
+            foreach (int i in myInts)
             {
                 Console.WriteLine(i);
             }
@@ -493,9 +499,104 @@ namespace CSharp_Basic_Program
             int[] myInts = { 10, 20, 30, 40 };
 
             // 在标准foreach循环中使用“var”
-            foreach(var item in myInts)
+            foreach (var item in myInts)
             {
                 Console.WriteLine("Item value: {0}", item);
+            }
+        }
+
+        // while循环结构
+        // ===================================================================
+        static void ExecuteWhileLoop()
+        {
+            string userIsDone = "";
+
+            // 对字符串的小写副本进行测试
+            while (userIsDone.ToLower() != "yes")
+            {
+                Console.Write("Are you done? [yes] [no]: ");
+                userIsDone = Console.ReadLine();
+                Console.WriteLine("In while loop");
+            }
+        }
+
+        // do/while循环结构
+        // ===================================================================
+        static void ExecuteDoWhileLoop()
+        {
+            string userIsDone = "";
+
+            do
+            {
+                Console.WriteLine("In do/while loop");
+                Console.Write("Are you done? [yes] [no]: ");
+                userIsDone = Console.ReadLine();
+            }
+            while(userIsDone.ToLower() != "yes");// Note the semicolon!
+        }
+
+        // if/else判断
+        // ===================================================================
+        static void ExecuteIfElse()
+        {
+            // 这是不合法的，因为Length返回的是int而不是bool
+            string stringData = "My textual data";
+            //if (stringData.Length)
+            //{
+            //    Console.WriteLine("string is greater than 0 characters");
+            //}
+
+            // 合法的，它解析为true或false
+            if (stringData.Length > 0)
+            {
+                Console.WriteLine("string is greater than 0 characters");
+            }
+        }
+        #endregion
+
+        // 默认Switch语句，根据数值进行转换
+        // ===================================================================
+        static void ExecuteSwitch()
+        {
+            Console.WriteLine("1[C#], 2[VB]");
+            Console.Write("Please pick your language preference: ");
+
+            string langChoise = Console.ReadLine();
+            int n = int.Parse(langChoise);
+
+            switch (n)
+            {
+                case 1:
+                    Console.WriteLine("Good choice, C# is a fine language.");
+                    break;
+                case 2:
+                    Console.WriteLine("VB: OOP, multithreading, and more!");
+                    break;
+                default:
+                    Console.WriteLine("Well...good luck with that!");
+                    break;
+            }
+        }
+
+        // Switch语句
+        // ===================================================================
+        static void ExecuteSwitchOnString()
+        {
+            Console.WriteLine("C# or VB");
+            Console.Write("Please pick your language preference: ");
+
+            string langChoice = Console.ReadLine();
+            switch(langChoice)
+            {
+                case "C#":
+                    Console.WriteLine("Good choice, C# is a fine language.");
+                    break;
+                case "VB":
+                    Console.WriteLine("VB: OOP, multithreading, and more!");
+                    break;
+                default:
+                    Console.WriteLine("Well...good luck with that!");
+                    break;
             }
         }
     }

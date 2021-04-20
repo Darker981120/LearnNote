@@ -1,0 +1,7 @@
+E:\PersonalFiles\LearnNote\CSharp_Basic\CSharp_Basic_Program_1\bin\Debug\CSharp_Basic_Program_1.exe.config
+E:\PersonalFiles\LearnNote\CSharp_Basic\CSharp_Basic_Program_1\bin\Debug\CSharp_Basic_Program_1.exe
+E:\PersonalFiles\LearnNote\CSharp_Basic\CSharp_Basic_Program_1\bin\Debug\CSharp_Basic_Program_1.pdb
+E:\PersonalFiles\LearnNote\CSharp_Basic\CSharp_Basic_Program_1\obj\Debug\CSharp_Basic_Program_1.csprojAssemblyReference.cache
+E:\PersonalFiles\LearnNote\CSharp_Basic\CSharp_Basic_Program_1\obj\Debug\CSharp_Basic_Program_1.csproj.CoreCompileInputs.cache
+E:\PersonalFiles\LearnNote\CSharp_Basic\CSharp_Basic_Program_1\obj\Debug\CSharp_Basic_Program_1.exe
+E:\PersonalFiles\LearnNote\CSharp_Basic\CSharp_Basic_Program_1\obj\Debug\CSharp_Basic_Program_1.pdb
