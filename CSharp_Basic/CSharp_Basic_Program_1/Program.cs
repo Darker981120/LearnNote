@@ -6,6 +6,7 @@ namespace CSharp_Basic_Program_1
     {
         static void Main(string[] args)
         {
+            #region
             //Console.WriteLine("***** Fun with Methods *****\n");
 
             // 按值传入两个变量
@@ -79,11 +80,129 @@ namespace CSharp_Basic_Program_1
             // 调用double版本的Add()
             //Console.WriteLine(Add(4.3, 4.4));
 
-            Console.WriteLine("***** Fun with Arrays *****\n");
+            //Console.WriteLine("***** Fun with Arrays *****\n");
             //SimpleArrays();
             //ArrayOfObjects();
-            RectMultidimensionalArray();
-            JaggedMultidimensionalArray();
+            //RectMultidimensionalArray();
+            //JaggedMultidimensionalArray();
+            //PassAndReceiveArrays();
+            //SystemArrayFunctionality();
+
+            //Console.WriteLine("***** Fun with Enums *****\n");
+            // 创建职员的类型
+            //EmpType emp = EmpType.Contractor;
+            //AskForBonus(emp);
+
+            // 输出枚举的存储
+            //Console.WriteLine("EmpType uses a {0} for storage",
+            //    Enum.GetUnderlyingType(emp.GetType()));
+
+            // 输出“emp is a Contractor”
+            //Console.WriteLine("emp is a {0}.", emp.ToString());
+
+            // 输出“Contractor = 100”
+            //Console.WriteLine("{0} = {1}", emp.ToString(), (byte)emp);
+
+            //EmpType e2 = EmpType.Contractor;
+
+            // 这些类型为System命名空间中的枚举值
+            //DayOfWeek day = DayOfWeek.Monday;
+            //ConsoleColor cc = ConsoleColor.Gray;
+
+            //EvaluateEnum(e2);
+            //EvaluateEnum(day);
+            //EvaluateEnum(cc);
+
+            //Console.WriteLine("***** A First Look at Strustures *****\n");
+            // 创建初始Point
+            //Point myPoint;
+            //myPoint.X = 349;
+            //myPoint.Y = 76;
+            //myPoint.Display();
+
+            // 调整X和Y的值
+            //myPoint.Increment();
+            //myPoint.Display();
+
+            // 错误！没有为Y赋值
+            //Point p1;
+            //p1.X = 10;
+            //p1.Display();
+
+            // 正确！在使用前两个字段都赋值了
+            //Point p2;
+            //p2.X = 10;
+            //p2.Y = 10;
+            //p2.Display();
+
+            // 使用默认构造函数将所有字段设置成默认值
+            //Point p1 = new Point();
+
+            // 输出X=0，Y=0
+            //p1.Display();
+
+            // 调用自定义构造函数
+            //Point p2 = new Point(50, 60);
+
+            // 输出X=10，Y=60
+            //p2.Display();
+
+            //ValueTypeAssignment();
+            //ValueTypeContainingRefType();
+
+            // 按值传递引用类型
+            //Console.WriteLine("***** Pssing Person object by value *****");
+            //Person fred = new Person("Fred", 12);
+            //Console.WriteLine("\nBefore by value call, Person is:");
+            //fred.Display();
+
+            //SendPersonByValue(fred);
+            //Console.WriteLine("\nAfter by value call, Person is:");
+            //fred.Display();
+
+            //Person mel = new Person("Mel", 23);
+            //Console.WriteLine("Before by value call, Person is:");
+            //mel.Display();
+
+            //SendAPersonByReference(ref mel);
+            //Console.WriteLine("After by ref call, Person is:");
+            //mel.Display();
+            #endregion
+
+            // 编译器错误
+            // 值类型不能设置为null
+            //bool myBool = null;
+            //int myInt = null;
+
+            // 没错！字符串是引用类型
+            //string myString = null;
+
+            Console.WriteLine("***** Fun with Nullable Data *****\n");
+            DatabaseReader dr = new DatabaseReader();
+
+            //  从“数据库”获取int
+            //int? i = dr.GetIntFromDatabase();
+            //if (i.HasValue)
+            //    Console.WriteLine("Value of 'i' is {0}", i.Value);
+            //else
+            //    Console.WriteLine("Value of 'i' is undefined.");
+
+            //  从“数据库”获取bool
+            //bool? b = dr.GetBoolFromDatabase();
+            //if (b.HasValue)
+            //    Console.WriteLine("Value of 'b' is {0}", b.Value);
+            //else
+            //    Console.WriteLine("Value of 'b' is undefined.");
+
+            // 从GetIntFromDatabase()返回值为null时，将本地变量赋值为100
+            int myData = dr.GetIntFromDatabase() ?? 100;
+            Console.WriteLine("Value of myData: {0}", myData);
+
+            // 使用？：？？语法的长阪本
+            int? moreData = dr.GetIntFromDatabase();
+            if (!moreData.HasValue)
+                moreData = 100;
+            Console.WriteLine("Value of moreData: {0}", moreData);
 
             Console.ReadLine();
         }
@@ -105,13 +224,13 @@ namespace CSharp_Basic_Program_1
 
         #region out 输出参数
         // 输出参数由被调用的方法赋值
-        static void Add(int x , int y, out int ans)
+        static void Add(int x, int y, out int ans)
         {
             ans = x + y;
         }
 
         // 返回多个输出参数
-        static void FillTheseValues(out int a, out string b,out bool c)
+        static void FillTheseValues(out int a, out string b, out bool c)
         {
             a = 9;
             b = "Enjoy your string.";
@@ -127,7 +246,7 @@ namespace CSharp_Basic_Program_1
 
         #region ref 引用参数
         // 引用参数
-        public static void SwapStrings(ref string s1,ref string s2)
+        public static void SwapStrings(ref string s1, ref string s2)
         {
             string tempStr = s1;
             s1 = s2;
@@ -145,7 +264,7 @@ namespace CSharp_Basic_Program_1
             if (values.Length == 0)
                 return sum;
 
-            for(int i = 0; i < values.Length; i++)
+            for (int i = 0; i < values.Length; i++)
                 sum += values[i];
             return (sum / values.Length);
         }
@@ -190,8 +309,8 @@ namespace CSharp_Basic_Program_1
 
 
         // 没有问题，命名参数设置了合适的默认值
-        static void DisplayFancyMessage(ConsoleColor textColor = ConsoleColor.Blue, 
-            ConsoleColor backgroundColor = ConsoleColor.White, 
+        static void DisplayFancyMessage(ConsoleColor textColor = ConsoleColor.Blue,
+            ConsoleColor backgroundColor = ConsoleColor.White,
              string message = "Test Message")
         {
             // ...
@@ -200,7 +319,7 @@ namespace CSharp_Basic_Program_1
 
         #region 成员重载
         // 重载的Add()方法
-        static int Add (int x,int y) { return x + y; }
+        static int Add(int x, int y) { return x + y; }
 
         static double Add(double x, double y) { return x + y; }
 
@@ -234,7 +353,7 @@ namespace CSharp_Basic_Program_1
             Console.WriteLine("=> Array Initialization.");
 
             // 使用new关键字的数组初始化语法
-            string[] stringArray = new string[] { "one","two","three" };
+            string[] stringArray = new string[] { "one", "two", "three" };
             Console.WriteLine("StringArray has {0} elements", stringArray.Length);
 
             // 不使用new关键字的数组初始化语法
@@ -283,7 +402,7 @@ namespace CSharp_Basic_Program_1
             myObjects[2] = new DateTime(1969, 3, 24);
             myObjects[3] = "Form & Void";
 
-            foreach(object obj in myObjects)
+            foreach (object obj in myObjects)
             {
                 // 输出数组中每一项的类型和值
                 Console.WriteLine("Type: {0}, Value: {1}", obj.GetType(), obj);
@@ -305,7 +424,7 @@ namespace CSharp_Basic_Program_1
                     myMatrix[i, j] = i * j;
 
             // 输出6*6数组
-            for(int i = 0; i < 6; i++)
+            for (int i = 0; i < 6; i++)
             {
                 for (int j = 0; j < 6; j++)
                     Console.Write(myMatrix[i, j] + "\t");
@@ -327,7 +446,7 @@ namespace CSharp_Basic_Program_1
                 myJagArray[i] = new int[i + 7];
 
             // 输出每一行（记住，每一个元素都默认为0）
-            for(int i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < myJagArray[i].Length; j++)
                     Console.Write(myJagArray[i][j] + " ");
@@ -335,6 +454,365 @@ namespace CSharp_Basic_Program_1
             }
             Console.WriteLine();
         }
+
+        // 数组作为参数（和返回值）
+        static void PrintArray(int[] myInts)
+        {
+            for (int i = 0; i < myInts.Length; i++)
+                Console.WriteLine("Item {0} is {1}", i, myInts[i]);
+        }
+
+        static string[] GetStringArray()
+        {
+            string[] theStrings = { "Hello", "from", "GetStringArray" };
+            return theStrings;
+        }
+
+        static void PassAndReceiveArrays()
+        {
+            Console.WriteLine("=> Arrays as params and return values.");
+            // 传递数组作为参数
+            int[] ages = { 10, 22, 23, 0 };
+            PrintArray(ages);
+
+            // 获取数组作为返回值
+            string[] strs = GetStringArray();
+            foreach (string s in strs)
+                Console.WriteLine(s);
+
+            Console.WriteLine();
+        }
+
+        // System.Array基类
+        static void SystemArrayFunctionality()
+        {
+            Console.WriteLine("=> Working with System.Array.");
+            // 初始化起始项
+            string[] gothicBands = { "Tones on Tail", "Bauhaus", "Sistera of Mercy" };
+
+            // 按声明的次序输出名字
+            Console.WriteLine("-> Here is the array:");
+            for (int i = 0; i < gothicBands.Length; i++)
+            {
+                // 输出一个名字
+                Console.Write(gothicBands[i] + ", ");
+            }
+            Console.WriteLine("\n");
+
+            // 反转它们
+            Array.Reverse(gothicBands);
+            Console.WriteLine("-> The reversed array");
+            // 输出它们
+            for (int i = 0; i < gothicBands.Length; i++)
+            {
+                // 输出一个名字
+                Console.Write(gothicBands[i] + ", ");
+            }
+            Console.WriteLine("\n");
+
+            // 清除除了最后成员之外的所有项
+            Console.WriteLine("-> Cleared out all but one...");
+            Array.Clear(gothicBands, 1, 2);
+            for (int i = 0; i < gothicBands.Length; i++)
+            {
+                // 输出一个名字
+                Console.Write(gothicBands[i] + ", ");
+            }
+            Console.WriteLine();
+        }
         #endregion
+
+        #region 枚举
+        // 自定义枚举
+        //enum EmpType
+        //{
+        //    //Default
+        //    //Manager,      // = 0
+        //    //Grunt,        // = 1
+        //    //Contractor,   // = 2
+        //    //VicePresident // = 3
+
+        //    // 从102开始
+        //    //Manager = 102,
+        //    //Grunt,        // = 103
+        //    //Contractor,   // = 104
+        //    //VicePresident // = 105
+
+        //    // 枚举的元素不需要是连续的
+        //    Manager = 10,
+        //    Grunt = 1,
+        //    Contractor = 100,
+        //    VicePresident = 9
+        //}
+
+        // 这次，EmpType对应实际的byte
+        enum EmpType : byte
+        {
+            Manager = 10,
+            Grunt = 1,
+            Contractor = 100,
+            VicePresident = 9
+        }
+
+        // 编译器错误！999所占的空间大于一个字节
+        //enum EmpType : byte
+        //{
+        //    Manager = 10,
+        //    Grunt = 1,
+        //    Contractor = 100,
+        //    VicePresident = 999
+        //}
+        
+        // 声明枚举变量
+        static void AskForBonus(EmpType e)
+        {
+            switch (e) 
+            {
+                case EmpType.Manager:
+                    Console.WriteLine("How about stock options instead?");
+                    break;
+                case EmpType.Grunt:
+                    Console.WriteLine("You have got to be kidding...");
+                    break;
+                case EmpType.Contractor:
+                    Console.WriteLine("You already get enough cash...");
+                    break;
+                case EmpType.VicePresident:
+                    Console.WriteLine("VERY GOOD, Siri!");
+                    break;
+            }
+        }
+
+        static void ThisMethodWillNotCompile()
+        {
+            // 错误！SalesManager不在EmpType枚举中
+            //EmpType emp = EmpType.SalesManager;
+
+            // 错误！忘记设定 Grunt值为EmpType美剧
+            //emp = Grunt;
+        }
+
+        // 这个方法会输出枚举的细节
+        static void EvaluateEnum(System.Enum e)
+        {
+            Console.WriteLine("=> Information about {0}", e.GetType().Name);
+
+            Console.WriteLine("Underlying storage type: {0}",
+                Enum.GetUnderlyingType(e.GetType()));
+
+            // 获取传入参数的名称/值对
+            Array enumData = Enum.GetValues(e.GetType());
+            Console.WriteLine("This enum has {0} members.", enumData.Length);
+            // 现在使用D格式标志显示字符串名和关联的值
+            for(int i = 0; i < enumData.Length; i++)
+            {
+                Console.WriteLine("Name: {0}, value: {0:D}", 
+                    enumData.GetValue(i));
+            }
+            Console.WriteLine();
+        }
+        #endregion
+
+        #region 结构体
+        struct Point
+        {
+            // 结构的字段
+            public int X;
+            public int Y;
+
+            // 自定义的构造函数
+            public Point(int XPos, int YPos)
+            {
+                X = XPos;
+                Y = YPos;
+            }
+
+            // 将(X, Y)坐标增加1
+            public void Increment()
+            {
+                X++;
+                Y++;
+            }
+
+            // 将(X, Y)坐标减去1
+            public void Decrement()
+            {
+                X--;
+                Y--;
+            }
+
+            // 显示当前坐标
+            public void Display()
+            {
+                Console.WriteLine("X = {0}, Y = {1}", X, Y);
+            }
+        }
+
+        // 本地变量在方法返回时弹出栈
+        static void LocalValueType()
+        {
+            // “int”其实是System.Int32结构
+            int i = 0;
+
+            // Point是结构类型
+            Point p = new Point();
+        } // "i" 和 "p" 在这里弹出栈
+        #endregion
+
+        #region 值类型与引用类型
+        // 为两个内建的值类型赋值会在栈上产生两个独立变量
+        static void ValueTypeAssignment()
+        {
+            Console.WriteLine("Assigning value types\n");
+
+            Point p1 = new Point(10, 10);
+            Point p2 = p1;
+
+            // 输出两个Pointref
+            p1.Display();
+            p2.Display();
+
+            // 改变p1.x并且再次输出
+            p1.X = 100;
+            Console.WriteLine("\n=> Changed p1.X\n");
+            p1.Display();
+            p2.Display();
+        }
+
+        // 包含引用类型的值类型
+        static void ValueTypeContainingRefType()
+        {
+            // 创建第一个Rctangle
+            Console.WriteLine("-> Creating r1");
+            Rectangle r1 = new Rectangle("First Rect", 10, 10, 50, 50);
+
+            // 现在将一个新的Rectangle赋值给r1
+            Console.WriteLine("-> Assigning r2 to r1");
+            Rectangle r2 = r1;
+
+            // 改变r2的值
+            Console.WriteLine("-> Changing values to r2");
+            r2.rectInfo.infoString = "This is new info!";
+            r2.rectBottom = 4444;
+
+            // 输出两个rectangle的值
+            r1.Display();
+            r2.Display();
+        }
+
+        static void SendPersonByValue(Person p)
+        {
+            // 改变‘p’的年龄
+            p.personAge = 99;
+
+            // 调用者能看到这个重新赋值吗
+            p = new Person("Nikki", 99);
+        }
+
+        static void SendAPersonByReference(ref Person p)
+        {
+            // 改变‘p‘的一些数据
+            p.personAge = 555;
+
+            // 'p’现在指向了堆上的一个新对象
+            p = new Person("Nikki", 999);
+        }
+        #endregion
+
+        #region 空类型
+        static void LocalNullableVariables()
+        {
+            // 定义一些布局可空类型
+            int? nullableInt = 10;
+            double? nullableDouble = 3.14;
+            bool? nullableBool = null;
+            char? nullableChar = 'a';
+            int?[] arrayOfNullableInts = new int?[10];
+
+            // 错误！字符串是引用类型
+            //string? s = "oops";
+        }
+
+        static void LocalNullableVariablesUsingNullable()
+        {
+            // 使用Nullable<T>定义一些局部可空变量
+            Nullable<int> nullableInt = 10;
+            Nullable<double> nullableDouble = 3.14;
+            Nullable<bool> nullableBool = null;
+            Nullable<Char> nullableChar = 'a';
+            Nullable<int>[] arrayOfNullableInts = new int?[10];
+        }
+        #endregion
+    }
+
+    struct Rectangle
+    {
+        // Rectangle结构包含一个引用类型成员
+        public ShapeInfo rectInfo;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+
+        public int rectTop, rectLeft, rectBottom, rectRight;
+
+        public Rectangle(string info,int top,int left,int bottom,int right)
+        {
+            rectInfo = new ShapeInfo(info);
+            rectTop = top;
+            rectBottom = bottom;
+            rectLeft = left;
+            rectRight = right;  
+        } 
+
+        public void Display()
+        {
+            Console.WriteLine("String = {0}, Top = {1}, Bottom = {2}, Left = {3}, Right = {4}",
+                rectInfo.infoString, rectTop, rectBottom, rectLeft, rectRight);
+        }
+    }
+
+    class ShapeInfo 
+    {
+        public string infoString;
+        public ShapeInfo(string info)
+        {
+            infoString = info;
+        }
+    }
+
+    class Person
+    {
+        public string personName;
+        public int personAge;
+
+        // 构造函数
+        public Person(string name, int age)
+        {
+            personName = name;
+            personAge = age;
+        }
+
+        public Person() { }
+
+        public void Display()
+        {
+            Console.WriteLine("Name: {0}, Age: {1}", personName, personAge);
+        }
+    }
+
+    class DatabaseReader
+    {
+        // 可控数据字段
+        public int? numericValue = null;
+        public bool? boolValue = true;
+
+        // 注意可空返回类型
+        public int? GetIntFromDatabase()
+        {
+            return numericValue;
+        }
+
+        // 注意可空返回类型
+        public bool? GetBoolFromDatabase()
+        {
+            return boolValue;
+        }
     }
 }
